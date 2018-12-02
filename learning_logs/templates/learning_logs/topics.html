@@ -1,0 +1,23 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+
+  <p>主题</p>
+
+  <ul>
+    <!--在模板中，每个 for 循环都必须使用 endfor 标签来显式地指出其结束位置。
+    我们使用模板标签 url 根据 learning_logs 中名为 topic 的 URL 模式来生成合适的链接。
+    这个 URL 模式要求提供实参 topic_id ，因此我们在模板标签 url 中添加了属性 topic.id。
+    现在，主题列表中的每个主题都是一个链接，链接到显示相应主题的页面，如 http://localhost:8000/topics/1/ 。
+    -->
+    {% for topic in topics %}
+      <li>
+        <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+	  </li>
+    <!--模板标签  empty  ，它告诉 Django 在列表 topics 为空时该怎么办-->
+    {% empty %}
+      <li>还没有添加主题</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
